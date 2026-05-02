@@ -1,0 +1,14 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "default",
+      "generator": "Visual Studio 16 2019",
+      "architecture": "x64",
+      "binaryDir": "project",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "F:/vcgh/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      }
+    }
+  ]
+}

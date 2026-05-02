@@ -1,0 +1,14 @@
+build/
+bin/
+project/
+*.exe
+*.obj
+*.pdb
+*.dll
+*.lib
+*.vcxproj.user
+*.opensdf
+*.log
+
+CMakeFiles/
+CMakeCache.txt
