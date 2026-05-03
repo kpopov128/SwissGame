@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <functional>
 #include <unordered_map>
@@ -38,3 +38,13 @@ private:
         std::vector<std::function<void(const void*)>>
     > Listeners;
 };
+
+
+
+
+
+
+
+
+
+

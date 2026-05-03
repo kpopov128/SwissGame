@@ -1,0 +1,50 @@
+#include "SfmlResourceManager.hpp"
+
+#include <SFML/System.hpp>
+#include <filesystem>
+
+#include <stdexcept>
+#include <utility>
+#include <iostream>
+
+const sf::Texture& SfmlResourceManager::GetTexture(const ImageRss& Resource)
+{
+    const std::string Path = Resolver.ResolveImage(Resource);
+
+    std::cout << "Loading texture: " << Path << std::endl;
+
+    auto It = Textures.find(Path);
+    if (It != Textures.end())
+    {
+        return It->second;
+    }
+
+    sf::Texture Texture;
+    if (!Texture.loadFromFile(Path))
+    {
+        throw std::runtime_error("Failed to load texture: " + Path);
+    }
+
+    auto Result = Textures.emplace(Path, std::move(Texture));
+    return Result.first->second;
+}
+
+const sf::Font& SfmlResourceManager::GetFont(const FontRss& Resource)
+{
+    const std::string Path = Resolver.ResolveFont(Resource);
+
+    auto It = Fonts.find(Path);
+    if (It != Fonts.end())
+    {
+        return It->second;
+    }
+
+    sf::Font Font;
+    if (!Font.openFromFile(Path))
+    {
+        throw std::runtime_error("Failed to load font: " + Path);
+    }
+
+    auto Result = Fonts.emplace(Path, std::move(Font));
+    return Result.first->second;
+}

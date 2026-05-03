@@ -1,19 +1,17 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <optional>
-
-#include "../core/EventBus.hpp"
-#include "../events/GameEvents.hpp"
+#include "core/EventBus.hpp"
+#include "input/TouchData.hpp"
 
 class InputSystem
 {
 public:
-    InputSystem(EventBus& Bus, sf::RenderWindow& Window);
+    explicit InputSystem(EventBus& Bus);
 
-    void Update();
+    void OnTouch(const TouchData& Touch);
+    void OnMove(const TouchData& Touch);
+    void OnRelease(const TouchData& Touch);
 
 private:
     EventBus& Bus;
-    sf::RenderWindow& Window;
 };

@@ -1,10 +1,12 @@
 #include "RenderSystem.hpp"
 
-RenderSystem::RenderSystem(sf::RenderWindow& Window, GameState& State)
-    : Window(Window), State(State)
-{}
-
-void RenderSystem::Draw()
+RenderSystem::RenderSystem(GameState& State)
+    : State(State)
 {
-    State.Table.Draw(Window);
+}
+
+void RenderSystem::Render(DrawList& DrawList)
+{
+    DrawList.Clear();
+    State.Table.Draw(DrawList);
 }

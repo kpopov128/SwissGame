@@ -1,19 +1,20 @@
-#pragma once
+﻿#pragma once
 
-#include <SFML/Graphics.hpp>
-
-struct MouseDownEvent
-{
-    sf::Vector2f Position;
-};
-
-struct MouseUpEvent
-{
-    sf::Vector2f Position;
-};
+#include "graphics/Point.hpp"
 
 struct PlaceBetEvent
 {
-    int FieldId;
-    int ChipValue;
+    int FieldId = 0;
+    int ChipValue = 0;
 };
+
+
+
+
+
+
+
+
+
+
+

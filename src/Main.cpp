@@ -1,36 +1,43 @@
-﻿#include <SFML/Graphics.hpp>
-
 #include "core/EventBus.hpp"
-#include "model/GameState.hpp"
-#include "model/BettingTable.hpp"
+#include "graphics/DrawList.hpp"
+#include "graphics/Point.hpp"
+#include "model/game_state/GameState.hpp"
 
-#include "systems/InputSystem.hpp"
+#include "platform/sfml/SfmlInputBridge.hpp"
+#include "platform/sfml/SfmlRenderer.hpp"
+#include "platform/sfml/SfmlResourceManager.hpp"
+#include "platform/sfml/SfmlWindow.hpp"
+
 #include "systems/BettingSystem.hpp"
+#include "systems/InputSystem.hpp"
 #include "systems/RenderSystem.hpp"
 
 int main()
 {
-    sf::RenderWindow Window(sf::VideoMode(sf::Vector2u(800, 600)), "casino");
+    SfmlWindow Window(1920, 1080, "casino");
+    SfmlResourceManager Resources;
+    SfmlRenderer RendererBackend(Window.GetNative(), Resources);
+    DrawList drawList;
 
     EventBus Bus;
     GameState State;
-    State.Table.Initialize();
-    State.Table.SetPosition(sf::Vector2f(100.f, 100.f));
+    State.Table.SetPosition(Point(660.0f, 465.0f));
 
-    sf::Vector2u windowSize = Window.getSize();
-
-    Window.setView(Window.getDefaultView());
-
-    InputSystem Input(Bus, Window);
+    InputSystem Input(Bus);
+    SfmlInputBridge InputBridge(Window, Input);
     BettingSystem Betting(Bus, State);
-    RenderSystem Renderer(Window, State);
+    RenderSystem Renderer(State);
 
-    while (Window.isOpen())
+    while (Window.IsOpen())
     {
-        Input.Update();
+        InputBridge.Update();
 
-        Window.clear(sf::Color::Black);
-        Renderer.Draw();
-        Window.display();
+        Renderer.Render(drawList);
+
+        Window.Clear();
+        RendererBackend.Render(drawList);
+        Window.Display();
     }
+
+    return 0;
 }

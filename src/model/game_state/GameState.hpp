@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BettingTable.hpp"
+#include "model/betting_table/BettingTable.hpp"
 
 class GameState
 {

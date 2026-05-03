@@ -3,15 +3,15 @@
 BettingSystem::BettingSystem(EventBus& Bus, GameState& State)
     : Bus(Bus), State(State)
 {
-    Bus.Subscribe<MouseUpEvent>(
-        [this](const MouseUpEvent& Event)
+    Bus.Subscribe<OnReleaseEvent>(
+        [this](const OnReleaseEvent& Event)
         {
-            OnMouseUp(Event);
+            OnRelease(Event);
         }
     );
 }
 
-void BettingSystem::OnMouseUp(const MouseUpEvent& Event)
+void BettingSystem::OnRelease(const OnReleaseEvent& Event)
 {
-    State.Table.TryPlaceBet(Event.Position, State.SelectedChip);
+    State.Table.TryPlaceBet(Event.Touch.Position, State.SelectedChip);
 }

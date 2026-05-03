@@ -1,30 +1,23 @@
 #include "InputSystem.hpp"
 
-InputSystem::InputSystem(EventBus& Bus, sf::RenderWindow& Window)
-    : Bus(Bus), Window(Window)
-{}
+#include "events/InputEvents.hpp"
 
-void InputSystem::Update()
+InputSystem::InputSystem(EventBus& Bus)
+    : Bus(Bus)
 {
-    while (const std::optional<sf::Event> Event = Window.pollEvent())
-    {
-        if (Event->is<sf::Event::Closed>())
-            Window.close();
+}
 
-        if (const auto* MouseDown = Event->getIf<sf::Event::MouseButtonPressed>())
-        {
-            Bus.Emit(MouseDownEvent{
-                sf::Vector2f((float)MouseDown->position.x,
-                             (float)MouseDown->position.y)
-                });
-        }
+void InputSystem::OnTouch(const TouchData& Touch)
+{
+    Bus.Emit(OnTouchEvent{ Touch });
+}
 
-        if (const auto* MouseUp = Event->getIf<sf::Event::MouseButtonReleased>())
-        {
-            Bus.Emit(MouseUpEvent{
-                sf::Vector2f((float)MouseUp->position.x,
-                             (float)MouseUp->position.y)
-                });
-        }
-    }
+void InputSystem::OnMove(const TouchData& Touch)
+{
+    Bus.Emit(OnMoveEvent{ Touch });
+}
+
+void InputSystem::OnRelease(const TouchData& Touch)
+{
+    Bus.Emit(OnReleaseEvent{ Touch });
 }

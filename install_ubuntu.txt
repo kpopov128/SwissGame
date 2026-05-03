@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -e
+
+VCPKG_DIR="$HOME/vcpkg"
+BUILD_DIR="build"
+
+sudo apt update
+sudo apt install -y \
+  git build-essential cmake ninja-build pkg-config curl zip unzip tar \
+  autoconf automake autoconf-archive libtool \
+  libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev \
+  libgl1-mesa-dev libflac-dev libogg-dev libvorbis-dev \
+  libopenal-dev libfreetype6-dev
+
+if [ ! -d "$VCPKG_DIR" ]; then
+  git clone https://github.com/microsoft/vcpkg.git "$VCPKG_DIR"
+  "$VCPKG_DIR/bootstrap-vcpkg.sh"
+fi
+
+"$VCPKG_DIR/vcpkg" install sfml
+
+cmake -S . -B "$BUILD_DIR" \
+  -G Ninja \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_TOOLCHAIN_FILE="$VCPKG_DIR/scripts/buildsystems/vcpkg.cmake"
+
+cmake --build "$BUILD_DIR"
+
+echo
+echo "Done."
+echo "Run:"
+echo "cd $BUILD_DIR && ./MyGame"

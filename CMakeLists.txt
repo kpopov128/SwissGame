@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 
 project(MyGame)
 
@@ -15,7 +15,9 @@ file(GLOB_RECURSE SOURCES
 
 add_executable(MyGame ${SOURCES})
 
-source_group(TREE ${CMAKE_SOURCE_DIR}/src FILES ${SOURCES})
+target_include_directories(MyGame PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
 
 target_link_libraries(MyGame PRIVATE
     SFML::Graphics
@@ -23,8 +25,12 @@ target_link_libraries(MyGame PRIVATE
     SFML::System
 )
 
-add_custom_command(TARGET MyGame POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/resources
-        $<TARGET_FILE_DIR:MyGame>/resources
-)
+source_group(TREE ${CMAKE_SOURCE_DIR}/src FILES ${SOURCES})
+
+if (EXISTS "${CMAKE_SOURCE_DIR}/resources")
+    add_custom_command(TARGET MyGame POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_SOURCE_DIR}/resources"
+            "$<TARGET_FILE_DIR:MyGame>/resources"
+    )
+endif()

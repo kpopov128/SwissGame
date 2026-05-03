@@ -1,16 +1,15 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include "../model/GameState.hpp"
+#include "graphics/DrawList.hpp"
+#include "model/game_state/GameState.hpp"
 
 class RenderSystem
 {
 public:
-    RenderSystem(sf::RenderWindow& Window, GameState& State);
+    explicit RenderSystem(GameState& State);
 
-    void Draw();
+    void Render(DrawList& DrawList);
 
 private:
-    sf::RenderWindow& Window;
     GameState& State;
 };

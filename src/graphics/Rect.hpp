@@ -1,22 +1,28 @@
-#pragma once
-#include "Drawable.hpp"
+﻿#pragma once
 
-class Rect : public Drawable
+class Rect
 {
 public:
-    Rect(sf::Vector2f Size);
+    Rect() = default;
 
-    void SetPosition(sf::Vector2f Position) override;
-    sf::Vector2f GetPosition() const override;
+    Rect(int Left, int Top, int Width, int Height)
+        : Left(Left), Top(Top), Width(Width), Height(Height)
+    {
+    }
 
-    void SetColor(sf::Color Color);
-
-    bool Contains(sf::Vector2f Point) const;
-
-    sf::Vector2f GetSize() const;
-
-    void Draw(sf::RenderWindow& Window) override;
-
-private:
-    sf::RectangleShape Shape;
+    int Left = 0;
+    int Top = 0;
+    int Width = 0;
+    int Height = 0;
 };
+
+
+
+
+
+
+
+
+
+
+
