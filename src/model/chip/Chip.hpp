@@ -9,7 +9,7 @@
 class Chip
 {
 public:
-    Chip::Chip(int bet, Point position)
+    Chip(int bet, Point position)
         : Bet(bet), Position(position), Background(EChipImage::eRed, position, DrawLayer::Chips)
     {
     }

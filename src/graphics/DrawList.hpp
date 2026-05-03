@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "DrawLayer.hpp"
 #include "Point.hpp"
@@ -10,7 +10,6 @@
 #include <array>
 #include <memory>
 #include <string>
-#include <variant>
 #include <vector>
 
 
@@ -45,12 +44,42 @@ struct DrawCircleCommand
     Color FillColor;
 };
 
-using DrawCommand = std::variant<
-    DrawSpriteCommand,
-    DrawTextCommand,
-    DrawRectangleCommand,
-    DrawCircleCommand
->;
+struct DrawCommand
+{
+    enum class Type
+    {
+        Sprite,
+        Text,
+        Rectangle,
+        Circle
+    };
+
+    DrawCommand(const DrawSpriteCommand& Command)
+        : CommandType(Type::Sprite), Sprite(Command)
+    {
+    }
+
+    DrawCommand(const DrawTextCommand& Command)
+        : CommandType(Type::Text), Text(Command)
+    {
+    }
+
+    DrawCommand(const DrawRectangleCommand& Command)
+        : CommandType(Type::Rectangle), Rectangle(Command)
+    {
+    }
+
+    DrawCommand(const DrawCircleCommand& Command)
+        : CommandType(Type::Circle), Circle(Command)
+    {
+    }
+
+    Type CommandType;
+    DrawSpriteCommand Sprite;
+    DrawTextCommand Text;
+    DrawRectangleCommand Rectangle;
+    DrawCircleCommand Circle;
+};
 
 class DrawList
 {
@@ -84,7 +113,10 @@ public:
         Push(layer, DrawCircleCommand{position, radius, fillColor});
     }
 
-    const auto& GetLayers() const
+    const std::array<
+        std::vector<DrawCommand>,
+        static_cast<size_t>(DrawLayer::Count)
+    >& GetLayers() const
     {
         return Layers;
     }

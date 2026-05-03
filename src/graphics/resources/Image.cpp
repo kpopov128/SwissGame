@@ -1,11 +1,12 @@
-﻿#include "Image.hpp"
+#include "Image.hpp"
 
-#include <filesystem>
+#include <fstream>
 
 bool Image::LoadFromFile(const std::string& Path)
 {
     this->Path = Path;
-    return std::filesystem::exists(Path);
+    std::ifstream File(Path.c_str());
+    return File.good();
 }
 
 const std::string& Image::GetPath() const

@@ -1,11 +1,12 @@
-﻿#include "Font.hpp"
+#include "Font.hpp"
 
-#include <filesystem>
+#include <fstream>
 
 bool Font::LoadFromFile(const std::string& Path)
 {
     this->Path = Path;
-    return std::filesystem::exists(Path);
+    std::ifstream File(Path.c_str());
+    return File.good();
 }
 
 const std::string& Font::GetPath() const

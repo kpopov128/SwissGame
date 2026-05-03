@@ -1,7 +1,6 @@
 #include "SfmlResourceManager.hpp"
 
 #include <SFML/System.hpp>
-#include <filesystem>
 
 #include <stdexcept>
 #include <utility>
@@ -40,7 +39,7 @@ const sf::Font& SfmlResourceManager::GetFont(const FontRss& Resource)
     }
 
     sf::Font Font;
-    if (!Font.openFromFile(Path))
+    if (!Font.loadFromFile(Path))
     {
         throw std::runtime_error("Failed to load font: " + Path);
     }

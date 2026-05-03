@@ -11,13 +11,21 @@ void SfmlRenderer::Render(const DrawList& DrawList)
     {
         for (const auto& Command : Layer)
         {
-            std::visit(
-                [this](const auto& Cmd)
-                {
-                    this->RenderCommand(Cmd);
-                },
-                Command
-                    );
+            switch (Command.CommandType)
+            {
+            case DrawCommand::Type::Sprite:
+                RenderCommand(Command.Sprite);
+                break;
+            case DrawCommand::Type::Text:
+                RenderCommand(Command.Text);
+                break;
+            case DrawCommand::Type::Rectangle:
+                RenderCommand(Command.Rectangle);
+                break;
+            case DrawCommand::Type::Circle:
+                RenderCommand(Command.Circle);
+                break;
+            }
         }
     }
 }
@@ -49,7 +57,8 @@ void SfmlRenderer::RenderCommand(const DrawTextCommand& Command)
 {
     const sf::Font& Font = Resources.GetFont(Command.Font);
 
-    sf::Text Text(Font);
+    sf::Text Text;
+    Text.setFont(Font);
     Text.setString(Command.Text);
     Text.setPosition({ static_cast<float>(Command.Position.X), static_cast<float>(Command.Position.Y) });
 

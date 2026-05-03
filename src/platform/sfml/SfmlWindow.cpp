@@ -1,7 +1,7 @@
 #include "SfmlWindow.hpp"
 
 SfmlWindow::SfmlWindow(unsigned int Width, unsigned int Height, const char* Title)
-    : NativeWindow(sf::VideoMode({ Width, Height }), Title)
+    : NativeWindow(sf::VideoMode(Width, Height), Title)
 {
 }
 
