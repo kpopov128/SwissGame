@@ -6,9 +6,9 @@
 class RenderSystem
 {
 public:
-    explicit RenderSystem(GameState& State);
+    explicit RenderSystem(GameState& state);
 
-    void Render(DrawList& DrawList);
+    void Render(DrawList& drawList);
 
 private:
     GameState& State;

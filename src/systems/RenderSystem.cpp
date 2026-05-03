@@ -1,12 +1,12 @@
 #include "RenderSystem.hpp"
 
-RenderSystem::RenderSystem(GameState& State)
-    : State(State)
+RenderSystem::RenderSystem(GameState& state)
+    : State(state)
 {
 }
 
-void RenderSystem::Render(DrawList& DrawList)
+void RenderSystem::Render(DrawList& drawList)
 {
-    DrawList.Clear();
-    State.Table.Draw(DrawList);
+    drawList.Clear();
+    State.TableView.Draw(drawList);
 }

@@ -10,8 +10,6 @@ const sf::Texture& SfmlResourceManager::GetTexture(const ImageRss& Resource)
 {
     const std::string Path = Resolver.ResolveImage(Resource);
 
-    std::cout << "Loading texture: " << Path << std::endl;
-
     auto It = Textures.find(Path);
     if (It != Textures.end())
     {

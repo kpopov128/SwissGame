@@ -1,7 +1,21 @@
 #include "Chip.hpp"
-#include "ChipResources.hpp"
 
-void Chip::Draw(DrawList& drawList) const
+Chip::Chip()
+    : Value(0)
 {
-    Background.Draw(drawList);
+}
+
+Chip::Chip(int value)
+    : Value(value)
+{
+}
+
+int Chip::GetValue() const
+{
+    return Value;
+}
+
+void Chip::SetValue(int value)
+{
+    Value = value;
 }

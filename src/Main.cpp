@@ -21,7 +21,8 @@ int main()
 
     EventBus Bus;
     GameState State;
-    State.Table.SetPosition(Point(660.0f, 465.0f));
+    State.TableView.SetPosition(Point(200, 465));
+    State.TableView.SetFieldSize(120);
 
     InputSystem Input(Bus);
     SfmlInputBridge InputBridge(Window, Input);

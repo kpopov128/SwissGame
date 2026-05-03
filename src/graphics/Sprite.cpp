@@ -8,6 +8,9 @@ void Sprite::SetBoxSize(Point size)
 
 void Sprite::Draw(DrawList& drawList) const
 { 
+    if (!IsVisible)
+        return;
+
     drawList.DrawSprite(Image, Position, BoxSize, HasCustomSize, Layer);
 }
 

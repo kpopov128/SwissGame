@@ -9,17 +9,20 @@ std::string SfmlResourceResolver::ResolveImage(const ImageRss& resource) const
     if (resource.Type == typeid(EChipImage))
     {
         const auto& image = resource.As<EChipImage>();
-
+ 
         switch (image)
         {
         case EChipImage::eRed:
             return "resources/chips/chip_red.png";
-            /*
-        case ChipImage::Blue:
-            return "resources/images/chip_blue.png";
-        case ChipImage::Green:
-            return "resources/images/chip_green.png";
-       */
+        case EChipImage::eGreen:
+            return "resources/chips/chip_green.png";
+        case EChipImage::eBlue:
+            return "resources/chips/chip_blue.png";
+        case EChipImage::eBlack:
+            return "resources/chips/chip_green.png";
+        case EChipImage::eWhite:
+            return "resources/chips/chip_green.png";
+       
         }
         throw std::runtime_error("Unknown EChipImage value");
     }

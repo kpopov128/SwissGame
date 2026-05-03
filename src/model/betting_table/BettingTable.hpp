@@ -1,29 +1,24 @@
 #pragma once
 
-#include "graphics/DrawList.hpp"
-#include "graphics/Point.hpp"
-#include "model/betting_field/BettingField.hpp"
-
 #include <vector>
+#include "model/betting_field/BettingField.hpp"
 
 class BettingTable
 {
 public:
     BettingTable();
 
-    void SetPosition(Point position);
-    Point GetPosition() const;
+    void PlaceBet(int fieldId, int chipValue);
+    int GetBetAmount(int fieldId) const;
 
-    void Draw(DrawList& drawList) const;
+    const BettingField& GetField(int fieldId) const;
+    BettingField& GetField(int fieldId);
 
-    bool TryPlaceBet(Point position, int value);
-    void SetActiveFieldAt(Point position);
-
-private:
-    void BuildFields();
+    void Clear();
 
 private:
-    Point Position;
+    bool IsValidFieldNumber(int fieldId) const;
 
+private:
     std::vector<BettingField> Fields;
 };

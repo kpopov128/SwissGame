@@ -1,71 +1,48 @@
 #include "BettingTable.hpp"
 
-namespace
-{
-    constexpr float FieldSize = 50.0f;
-    constexpr int Columns = 12;
-    constexpr int Rows = 3;
-}
-
 BettingTable::BettingTable()
-    : Position(660.0f, 465.0f)
 {
-    BuildFields();
-}
-
-void BettingTable::BuildFields()
-{
-    Fields.clear();
-    Fields.reserve(Columns * Rows);
-
-    for (int i = 0; i < Columns * Rows; ++i)
+    for (int i = 1; i <= 36; ++i)
     {
-        int id = i + 1;
-        int row = i / Columns;
-        int column = i % Columns;
-
-        Point fieldPosition(Position.X + column * FieldSize,  Position.Y + row * FieldSize);
-        Fields.emplace_back(id, fieldPosition);
+        Fields.push_back(BettingField(i));
     }
 }
 
-void BettingTable::SetPosition(Point position)
+void BettingTable::PlaceBet(int fieldId, int chipValue)
 {
-    Position = position;
-    BuildFields();
+    if (!IsValidFieldNumber(fieldId))
+        return;
+
+    Fields[fieldId - 1].AddChip(chipValue);
 }
 
-Point BettingTable::GetPosition() const
+int BettingTable::GetBetAmount(int fieldId) const
 {
-    return Position;
+    if (!IsValidFieldNumber(fieldId))
+        return 0;
+
+    return Fields[fieldId - 1].GetAmount();
 }
 
-void BettingTable::Draw(DrawList& drawList) const
+const BettingField& BettingTable::GetField(int fieldId) const
 {
-    for (const auto& field : Fields)
-    {
-        field.Draw(drawList);
-    }
+    return Fields[fieldId - 1];
 }
 
-bool BettingTable::TryPlaceBet(Point position, int value)
+BettingField& BettingTable::GetField(int fieldId)
+{
+    return Fields[fieldId - 1];
+}
+
+void BettingTable::Clear()
 {
     for (auto& field : Fields)
     {
-        if (field.Contains(position))
-        {
-            field.SetBet(value);
-            return true;
-        }
+        field.Clear();
     }
-
-    return false;
 }
 
-void BettingTable::SetActiveFieldAt(Point position)
+bool BettingTable::IsValidFieldNumber(int fieldId) const
 {
-    for (auto& field : Fields)
-    {
-        field.SetActive(field.Contains(position));
-    }
+    return fieldId >= 1 && fieldId <= 36;
 }
