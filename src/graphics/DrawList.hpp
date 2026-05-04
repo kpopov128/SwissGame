@@ -84,6 +84,9 @@ struct DrawCommand
 class DrawList
 {
 public:
+    using LayersList = std::array<std::vector<DrawCommand>, static_cast<size_t>(DrawLayer::Count)>;
+
+public:
     void Clear()
     {
         for (auto& Layer : Layers)
@@ -113,10 +116,7 @@ public:
         Push(layer, DrawCircleCommand{position, radius, fillColor});
     }
 
-    const std::array<
-        std::vector<DrawCommand>,
-        static_cast<size_t>(DrawLayer::Count)
-    >& GetLayers() const
+    const LayersList& GetLayers() const
     {
         return Layers;
     }
@@ -128,10 +128,7 @@ private:
     }
 
 private:
-    std::array<
-        std::vector<DrawCommand>,
-        static_cast<size_t>(DrawLayer::Count)
-    > Layers;
+    LayersList Layers;
 };
 
 

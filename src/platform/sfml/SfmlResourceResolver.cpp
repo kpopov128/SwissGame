@@ -1,6 +1,6 @@
 #include "SfmlResourceResolver.hpp"
 
-#include "model/GameResources.hpp"
+#include "ui/GameResources.hpp"
 
 #include <stdexcept>
 
@@ -19,9 +19,9 @@ std::string SfmlResourceResolver::ResolveImage(const ImageRss& resource) const
         case EChipImage::eBlue:
             return "resources/chips/chip_blue.png";
         case EChipImage::eBlack:
-            return "resources/chips/chip_green.png";
+            return "resources/chips/chip_black.png";
         case EChipImage::eWhite:
-            return "resources/chips/chip_green.png";
+            return "resources/chips/chip_white.png";
        
         }
         throw std::runtime_error("Unknown EChipImage value");

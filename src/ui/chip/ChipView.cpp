@@ -51,9 +51,9 @@ void ChipView::Draw(DrawList& drawList) const
 EChipImage ChipView::ResolveImage(int amount) const
 {
     if      (amount <= 0) return EChipImage::eUnknown;
-    else if (amount < 10) return EChipImage::eRed;
-    else if (amount < 25) return EChipImage::eGreen;
-    else if (amount < 50) return EChipImage::eBlue;
+    else if (amount < 11) return EChipImage::eRed;
+    else if (amount < 26) return EChipImage::eGreen;
+    else if (amount < 51) return EChipImage::eBlue;
     else if (amount < 100) return EChipImage::eBlack;
 
     return EChipImage::eWhite;

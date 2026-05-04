@@ -1,9 +1,11 @@
 #pragma once
 
+#include "ChipResources.hpp"
+
 #include "graphics/Sprite.hpp"
 #include "graphics/Point.hpp"
 #include "graphics/DrawList.hpp"
-#include "model/chip/ChipResources.hpp"
+
 
 class ChipView
 {

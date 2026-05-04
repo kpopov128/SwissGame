@@ -1,5 +1,5 @@
 #include "BettingFieldView.hpp"
-#include "model/betting_field/BettingFieldResources.hpp"
+#include "BettingFieldResources.hpp"
 
 BettingFieldView::BettingFieldView(int fieldNumber, Point position, float fieldSize)
     : FieldId(fieldNumber),

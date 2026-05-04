@@ -51,14 +51,14 @@ int BettingTableView::HitTest(Point position) const
     return -1;
 }
 
-void BettingTableView::SetFieldAmount(int fieldNumber, int amount)
+void BettingTableView::SetFieldAmount(int fieldId, int amount)
 {
-    if (fieldNumber < 1 || fieldNumber > static_cast<int>(Fields.size()))
+    if (fieldId < 1 || fieldId > static_cast<int>(Fields.size()))
     {
         return;
     }
 
-    Fields[fieldNumber - 1].SetAmount(amount);
+    Fields[fieldId - 1].SetAmount(amount);
 }
 
 void BettingTableView::Draw(DrawList& drawList) const

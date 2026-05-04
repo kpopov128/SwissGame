@@ -52,23 +52,23 @@ void BettingSystem::OnRelease(const OnReleaseEvent& event)
 
 void BettingSystem::HandleTouchPosition(Point position)
 {
-    int fieldNumber = State.TableView.HitTest(position);
+    const auto fieldId = State.TableView.HitTest(position);
 
-    if (fieldNumber == -1)
+    if (fieldId == -1)
     {
         LastFieldId = -1;
         return;
     }
 
-    if (fieldNumber == LastFieldId)
+    if (fieldId == LastFieldId)
     {
         return;
     }
 
-    State.Table.PlaceBet(fieldNumber, State.SelectedChip);
+    State.Table.PlaceBet(fieldId, State.SelectedChip);
 
-    int amount = State.Table.GetBetAmount(fieldNumber);
-    State.TableView.SetFieldAmount(fieldNumber, amount);
+    const auto amount = State.Table.GetBetAmount(fieldId);
+    State.TableView.SetFieldAmount(fieldId, amount);
 
-    LastFieldId = fieldNumber;
+    LastFieldId = fieldId;
 }

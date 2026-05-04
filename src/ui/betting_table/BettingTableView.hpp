@@ -10,7 +10,7 @@ public:
     void SetFieldSize(float size);
 
     int HitTest(Point position) const;
-    void SetFieldAmount(int fieldNumber, int amount);
+    void SetFieldAmount(int fieldId, int amount);
     void Draw(DrawList& drawList) const;
 
 private:
