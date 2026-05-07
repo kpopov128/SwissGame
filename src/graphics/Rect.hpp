@@ -5,15 +5,15 @@ class Rect
 public:
     Rect() = default;
 
-    Rect(int Left, int Top, int Width, int Height)
-        : Left(Left), Top(Top), Width(Width), Height(Height)
+    Rect(int x, int y, int w, int h)
+        : X(x), Y(y), W(w), H(h)
     {
     }
 
-    int Left = 0;
-    int Top = 0;
-    int Width = 0;
-    int Height = 0;
+    int X = 0;
+    int Y = 0;
+    int W = 0;
+    int H = 0;
 };
 
 

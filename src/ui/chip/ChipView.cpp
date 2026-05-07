@@ -1,7 +1,9 @@
 #include "ChipView.hpp"
+#include "graphics/DrawLayer.hpp"
 
 ChipView::ChipView()
 {
+    Background.SetLayer(DrawLayer::Chips);
 }
 
 void ChipView::SetAmount(int amount)
@@ -50,7 +52,7 @@ void ChipView::Draw(DrawList& drawList) const
 
 EChipImage ChipView::ResolveImage(int amount) const
 {
-    if      (amount <= 0) return EChipImage::eUnknown;
+    if (amount <= 0) return EChipImage::eUnknown;
     else if (amount < 11) return EChipImage::eRed;
     else if (amount < 26) return EChipImage::eGreen;
     else if (amount < 51) return EChipImage::eBlue;

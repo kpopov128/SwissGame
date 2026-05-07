@@ -47,6 +47,7 @@ void BettingSystem::OnMove(const OnMoveEvent& event)
 void BettingSystem::OnRelease(const OnReleaseEvent& event)
 {
     IsTouching = false;
+    State.TableView.ClearHighlights();
     LastFieldId = -1;
 }
 
@@ -56,9 +57,12 @@ void BettingSystem::HandleTouchPosition(Point position)
 
     if (fieldId == -1)
     {
+        State.TableView.ClearHighlights();
         LastFieldId = -1;
         return;
     }
+
+    State.TableView.HighlightField(fieldId);
 
     if (fieldId == LastFieldId)
     {
